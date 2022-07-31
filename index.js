@@ -57,6 +57,7 @@ async function run() {
     const toolCollection = client.db("scrap_tools_ltd").collection("tools");
     const userCollection = client.db("scrap_tools_ltd").collection("users");
     const reviewCollection = client.db("scrap_tools_ltd").collection("reviews");
+    const cartCollection = client.db("scrap_tools_ltd").collection("cartItems");
     const purchaseCollection = client
       .db("scrap_tools_ltd")
       .collection("purchases");
@@ -206,11 +207,21 @@ async function run() {
       res.send(result);
     });
 
+
+
     app.post("/review", async (req, res) => {
       const review = req.body;
       const result = await reviewCollection.insertOne(review);
       res.send(result);
     });
+
+    app.post("/cartItem", async (req, res) => {
+      const cartItem = req.body;
+      const result = await cartCollection.insertOne(cartItem);
+      res.send(result);
+    });
+
+
     
     // updateuser
     app.put('/updateduser', verifyJWT, async (req, res) => {
